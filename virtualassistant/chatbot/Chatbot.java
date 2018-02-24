@@ -27,16 +27,16 @@ public Chatbot implements IChatbot {
 		+ "   \"timezone\": \"Europe/Madrid\"\n"
 		+ "}";
 
-		final String document = Jsoup.connect("https://api.dialogflow.com/v1/query?v=20150910") // Gets response from dialogflow
-		.requestBody(body)
-		.header("Authorization", authorization).header("Content-Type", contentType).ignoreContentType(true)
-		.postDataCharset("UTF-8")
-		.post().text();
+	final String document = Jsoup.connect("https://api.dialogflow.com/v1/query?v=20150910") // Gets response from dialogflow
+	.requestBody(body)
+	.header("Authorization", authorization).header("Content-Type", contentType).ignoreContentType(true)
+	.postDataCharset("UTF-8")
+	.post().text();
         
         // Getting the response needed from the json retrieved.
         final JSONObject json = (JSONObject) parser.parse(document);
-		final JSONObject results =  (JSONObject) json.get("result");
-		final String response = ((JSONObject) results.get("fulfillment")).get("speech").toString();
+	final JSONObject results =  (JSONObject) json.get("result");
+	final String response = ((JSONObject) results.get("fulfillment")).get("speech").toString();
         return response;
     }
 }
